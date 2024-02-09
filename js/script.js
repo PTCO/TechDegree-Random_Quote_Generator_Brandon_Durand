@@ -87,15 +87,31 @@ const getRandomQuote = ()=>{
  */
 const printQuote = ()=> {
   let quote = getRandomQuote(); // Store randomly generated quote
-  let HTML = '';
-
-  /* Quote HTML Markup  */
-  HTML = `
-    <div id="quote-box" class="quote-box">
+  let HTML = `<div id="quote-box" class="quote-box">
       <p class="quote">${quote.quote}</p>
-      <p class="source">${quote.source}<span class="citation">${quote.citation}</span><span class="year">${quote.year}</span></p>
+      <p class="source">${quote.source}`;
+
+  if(quote.year && quote.citation){
+  /* Quote HTML Markup  */
+  HTML += `
+      <span class="citation">${quote.citation}</span>
+      <span class="year">${quote.year}</span>
+      </p>
     </div>
-    `;
+  `;  
+  }
+  
+  if(quote.year && quote.citation && quote.topic){
+    HTML += `
+        <span class="citation">${quote.citation}</span>
+        <span class="year">${quote.year}</span>
+        <span class="year">Topic: ${quote.topic}</span>
+      </p>
+    </div>
+  `;  
+  }
+
+  
   
   document.querySelector('.container').innerHTML = HTML;  // Displays Quote in Browser
   document.querySelector('body').style.backgroundColor = `rgba(${randomNumber().rgba}, ${randomNumber().rgba}, ${randomNumber().rgba})`// Changes bcakgroud color when a new quote is printed
