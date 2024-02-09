@@ -54,7 +54,7 @@ const quotes = [
     citation: 'winstonchurchill.org',
     source: 'Winston J Churchil',
     year: 1941
-  },
+  }
 ]
 
 /*
@@ -87,30 +87,35 @@ const getRandomQuote = ()=>{
  */
 const printQuote = ()=> {
   let quote = getRandomQuote(); // Store randomly generated quote
+
+  /* Quote HTML Markup  */
   let HTML = `<div id="quote-box" class="quote-box">
       <p class="quote">${quote.quote}</p>
       <p class="source">${quote.source}`;
 
-  if(quote.year && quote.citation){
-  /* Quote HTML Markup  */
-  HTML += `
-      <span class="citation">${quote.citation}</span>
-      <span class="year">${quote.year}</span>
-      </p>
-    </div>
-  `;  
-  }
-  
-  if(quote.year && quote.citation && quote.topic){
+  /* Property exists checks or conditionals */
+  if(quote.citation){
     HTML += `
-        <span class="citation">${quote.citation}</span>
-        <span class="year">${quote.year}</span>
-        <span class="year">Topic: ${quote.topic}</span>
-      </p>
-    </div>
-  `;  
+      <span class="citation">${quote.citation}</span>
+    `;  
   }
 
+  if(quote.year){
+  HTML += `
+      <span class="year">${quote.year}</span>
+    `;  
+  }
+  
+  if( quote.topic){
+    HTML += `
+      <span class="citation">Topic: ${quote.topic}</span>
+    `;  
+  }
+  
+  HTML += `
+    </p>
+  </div>
+  `; 
   
   
   document.querySelector('.container').innerHTML = HTML;  // Displays Quote in Browser
@@ -123,7 +128,7 @@ const printQuote = ()=> {
 setInterval(() => {
   document.querySelector('body').style.backgroundColor = `rgba(${randomNumber().rgba}, ${randomNumber().rgba}, ${randomNumber().rgba})` // Changes bcakgroud color when a new quote is printed
   printQuote() // Prints a new random quote
-}, 5000);
+}, 50000);
 
 
 /***
